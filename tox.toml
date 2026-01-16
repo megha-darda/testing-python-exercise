@@ -1,0 +1,21 @@
+requires = ["tox>=4"]
+env_list = ["unit", "integration", "report"]
+
+[env_run_base]
+deps = ["-rrequirements.txt"]
+set_env = { PYTHONPATH = "{tox_root}" }
+
+[env.unit]
+description = "Run unit tests"
+commands = [["pytest", "-q", "tests/unit"]]
+
+[env.integration]
+description = "Run integration tests"
+commands = [["pytest", "-q", "tests/integration"]]
+
+[env.report]
+description = "Generate coverage HTML report"
+commands = [
+  ["coverage", "run", "-m", "pytest"],
+  ["coverage", "html"]
+]
